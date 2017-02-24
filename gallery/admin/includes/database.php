@@ -40,7 +40,8 @@
 		}
 
 		public function the_insert_id(){
-			return $this->connection->insert_id; 
+//			return $this->connection->insert_id;
+            return mysqli_insert_id($this->connection);
 		}
 
 
@@ -48,7 +49,7 @@
 		
 	}//End of class Database
 
-	$database = new Database; //instatiating the class, now we can use this variable to use the class 
+	$database = new Database(); //instantiating the class, now we can use this variable to use the class
 
 
 ?>
