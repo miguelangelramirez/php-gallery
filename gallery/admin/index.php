@@ -1,5 +1,9 @@
   <!-- Header Starts -->
-  <?php include 'includes/header.php'; ?> 
+  <?php include 'includes/header.php'; ?>
+
+<!-- Inserting Session check -->
+  <?php //if (!$session->is_signed_in()){ redirect("login.php"); } ?>
+
   <!-- Header Ends -->
   <?php include 'includes/admin-navigation.php'; ?>
   </header>
@@ -14,8 +18,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Version 2.0</small>
+        Photo Gallery
+        <small>Version 0.1</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

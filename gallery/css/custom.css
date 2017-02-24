@@ -1,0 +1,13 @@
+/* Custom CSS */
+.centered {
+    float: unset;
+    display: block;
+    margin:auto;
+    margin-top:45px;
+}
+
+.user_picture {
+    max-width: 65px;
+    border: 1px solid silver;
+    padding: 1px;
+}

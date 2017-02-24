@@ -1,77 +1,55 @@
-<?php 
-	/**
-	* 
-	*/
-	class User{
-		public $id; 
-		public $username; 
-		public $password; 
-		public $first_name; 
-		public $last_name; 
-		
-		public static function find_all_users(){
-			return self::find_this_query("SELECT * FROM users");
-		}
+<?php
 
-		public static function find_user_by_id($id){
-			global $database; 
-			$the_result_set = self::find_this_query("SELECT * FROM users WHERE id=$id LIMIT 1");
-//			$found_user = mysqli_fetch_array($the_user);
-//            if (!empty($the_result_set)){
-//                $first_item = array_shift($the_result_set);
-//                return $first_item;
-//            }else{
-//                return FALSE;
-//            }
+class User {
+    protected static $db_table = "users";
+    protected static $db_table_fields = array('username', 'password', 'first_name', 'last_name', 'picture');
+    public $id;
+    public $username;
+    public $password;
+    public $first_name;
+    public $last_name;
+    public $picture;
 
-            return !empty($the_result_set) ? array_shift($the_result_set) : false;
-			return $found_user;
 
-		}
-		
-		public static function find_this_query($sql){
-			global $database;
-			$result_set = $database->query($sql); 
-			$the_object_array = array(); 
+    public static function verify_user($username,$password){
+        global $database;
 
-			while ($row = mysqli_fetch_array($result_set)) {
-				$the_object_array[] = self::instantiation($row);
-			}
+        $username = $database->escape_string($username); //cleaning the username and password
+        $password = $database->escape_string($password);
 
-			return $the_object_array;
-		}
+        //generating the sql statement to look for the username and password
+        $sql = "SELECT * FROM ". self::$db_table . " WHERE username = '{$username}' AND password = '{$password}' LIMIT 1";
 
-		// public static function instantiation($found_user){//long way instantiation 
-		// 	$the_object = new self; 
-		// 	$the_object->id 	    = $found_user['id']; 
-		// 	$the_object->username   = $found_user['username'];
-		// 	$the_object->password   = $found_user['password'];
-		// 	$the_object->first_name = $found_user['first_name'];
-		// 	$the_object->last_name  = $found_user['last_name'];
-		// 	return $the_object;
-		// }
+        //reusing the function to return the result set
+        $the_result_set = self::find_this_query($sql);
+        return !empty($the_result_set) ? array_shift($the_result_set) : false;
+    }
 
-		public static function instantiation($the_record){//short way instantiation 
-			$the_object = new self; 
-			// $the_object->id 	    = $found_user['id']; 
-			// $the_object->username   = $found_user['username'];
-			// $the_object->password   = $found_user['password'];
-			// $the_object->first_name = $found_user['first_name'];
-			// $the_object->last_name  = $found_user['last_name'];
 
-			foreach ($the_record as $the_attribute => $value) {
-				if ($the_object->has_the_attribute($the_attribute)) {
-					$the_object->$the_attribute = $value;
-				}
-			}
+    protected function properties(){
 
-			return $the_object;
-		}
+        $properties = array();
+        foreach(self::$db_table_fields as $db_field){
+            if (property_exists($this, $db_field)){
+                $properties[$db_field] = $this->$db_field;
+            }
+        }
 
-		private function has_the_attribute($the_attribute){
-			$object_properties = get_object_vars($this); 
-			return array_key_exists($the_attribute, $object_properties);
-		}
+        return $properties;
+    }
+
+    protected function clean_properties(){
+        global $database;
+
+        $clean_properties = array();
+
+        foreach($this->properties() as $key => $value) {
+            $clean_properties[$key] = $database->escape_string($value);
+        }
+
+        return $clean_properties;
+
+    }
 
 
 
@@ -80,10 +58,62 @@
 
 
 
-	}// End of class User
+
+    public function save(){
+        return isset($this->id) ? $this->update() : $this->create();
+    }
+
+    public function create(){
+        global $database;
+
+        $properties = $this->clean_properties();
+
+        $sql = "INSERT INTO " . self::$db_table  . "(" . implode(", ", array_keys($properties)) . ")";
+        $sql .= "VALUES ('" . implode("','", array_values($properties)) . "') ";
+
+        if($database->query($sql)) {
+//                echo "Query successful";
+            $this->id = $database->the_insert_id();
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public function update(){
+        global $database;
+
+        $properties = $this->clean_properties();
+
+        $property_pairs = array();
+
+        foreach ($properties as $key => $value){
+            $property_pairs[] = "{$key}='{$value}'";
+        }
+
+        $sql = "UPDATE " . self::$db_table . " SET ";
+        $sql .= implode(", ", $property_pairs);
+        $sql .= " WHERE id="   . $database->escape_string($this->id);
+
+        $database->query($sql);
+
+        return (mysqli_affected_rows($database->connection) == 1) ? TRUE : false;
+    }
 
 
 
+    public function delete(){
+        global $database;
+
+        $sql = "DELETE FROM " . self::$db_table . " WHERE id='" . $database->escape_string($this->id) ."'";
+        $database->query($sql);
+
+        return (mysqli_affected_rows($database->connection) == 1)? true : false;
+
+//            $message =  "The User: " . $this->username . " was deleted";
+//            return $message;
+    }
+}// End of class User
 
 
 

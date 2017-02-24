@@ -12,9 +12,7 @@
 	// echo "Username: " . $user_found['username'];
 	
 	// getting all the suers
-	
 	// $result_set = User::find_all_users();
-
 	// while ($row = mysqli_fetch_array($result_set)) {
 	// 	echo $row['id'] . ". " .  "Username: " . $row['username'] . "<br>";
 	// }
@@ -48,14 +46,11 @@
 //	echo $user->username;
 
     echo "<br><br><br>";
-
-    $users = User::find_all_users();
-
-    foreach ($users as $user){
-        echo "User: " .  $user->username . "<br>";
-    }
-
-
+//    show all the Users
+//    $users = User::find_all();
+//    foreach ($users as $user){
+//        echo "User: " .  $user->username . "<br>";
+//    }
 
 
 
@@ -63,9 +58,60 @@
 
 	echo "<br><br><br>";
 
+//    $found_user = User::find_user_by_id(2);
+//    echo    $found_user->username;
 
-    $found_user = User::find_user_by_id(2);
-    echo    $found_user->username;
+    echo "<br><br><br>";
+
+//    $this_user = new User();
+//    $this_user->username = "jack";
+//    $this_user->password = "123";
+//    $this_user->first_name = "Jack";
+//    $this_user->last_name = "Veneno";
+//    $this_user->create();
 
 
+    //updating a record
+//    $user = User::find_user_by_id(2);
+//    $user->last_name = " ";
+//    $user->update();
 
+//    $deleteme = User::find_user_by_id(33);
+//    $deleteme->delete();
+
+//    //updating an record on the database
+//    $user = User::find_user_by_id(34);
+//    $user->username = "sanchez";
+//    $user->first_name = "Francisco del Rosario";
+//    $user->last_name = "Sanchez";
+//    $user->password = '987654321';
+//    $user->picture = "http://www.biografiasyvidas.com/biografia/s/fotos/sanchez_francisco.jpg";
+//    $user->update();
+
+//    $user = new User();
+//    $user->username = "WHATEVER";
+//    $user->save();
+
+//    $user = new User();
+//    $user->username = "mella";
+//    $user->password = "54321";
+//    $user->first_name = "Ramon";
+//    $user->last_name = "Matias Mella";
+//    $user->picture = "http://www.educando.edu.do/files/4813/9333/3191/matias_ramon_mella_250.jpg";
+//    $user->save();
+
+//    $thisuser = User::find_user_by_id(36);
+//    $thisuser->username = "fidel";
+//    $thisuser->password = "123";
+//    $thisuser->first_name = "Fidel";
+//    $thisuser->last_name = "Castro";
+//    $thisuser->picture = "https://media1.britannica.com/eb-media/75/44175-004-1AA92245.jpg";
+//    $thisuser->update();
+
+//    $updateme = User::find_user_by_id(38);
+//    $updateme->picture = "http://nuevayores.blogs.com/.a/6a00d834518de369e2017d419cc04b970c-pi";
+//    $updateme->update();
+
+    echo "<pre>";
+    print_r(get_declared_classes());
+    echo "</pre>";

@@ -1,5 +1,8 @@
 <?php ob_start(); ?><!-- TURNING ON OUTPUT BUFFERING -->
-<?php include("init.php"); ?>
+<?php require_once("init.php"); ?>
+
+<!-- Inserting Session check -->
+<?php //if (!$session->is_signed_in()){ redirect('login.php'); } ?>
 
 <!DOCTYPE html>
 <html>
@@ -22,6 +25,9 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+  <!-- Inserting Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
