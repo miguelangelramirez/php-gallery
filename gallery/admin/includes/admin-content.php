@@ -1,5 +1,67 @@
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>150</h3>
+
+                <p>Comments</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-comments-o"></i>
+            </div>
+            <a href="comments.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3><?php echo Photo::count_rows(); ?></h3>
+
+                <p>Photos</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-camera-retro"></i>
+            </div>
+            <a href="photos.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3><?php echo User::count_rows(); ?></h3>
+
+                <p>Users</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>65</h3>
+
+                <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
 <?php
-	// echo "nothing to see here" . "<br>";
 
 	//testing the connection 
 	// if ($database->connection) {
@@ -11,20 +73,20 @@
 	// $user_found = mysqli_fetch_array($result);
 	// echo "Username: " . $user_found['username'];
 	
-	// getting all the suers
-	// $result_set = User::find_all_users();
-	// while ($row = mysqli_fetch_array($result_set)) {
-	// 	echo $row['id'] . ". " .  "Username: " . $row['username'] . "<br>";
-	// }
+//	 getting all the suers
+//	 $result_set = User::find_all();
+//	 while ($row = mysqli_fetch_array($result_set)) {
+//	 	echo $row['id'] . ". " .  "Username: " . $row['username'] . "<br>";
+//	 }
 
-	// echo "<br><br><br>";
-
-	// $find_user = User::find_user_by_id(1); 
-
-	// echo "The username: " . $find_user['username']; 
-	
-	// $found_user = User::find_user_by_id(2); 
-	// echo $user->id; 
+//	 echo "<br><br><br>";
+//
+//	 $find_user = User::find_by_id(1);
+//
+//	 echo "The username: " . $find_user['username'];
+//
+//	 $found_user = User::find_by_id(2);
+//	 echo $user->id;
 
 	// $user = new User(); //this we instantiate the object with its properties below
 	// $user->id 		= $found_user['id']; //here we are assgining the values to the properties to be called 
@@ -45,23 +107,22 @@
 //	$user = User::instantiation($found_user);
 //	echo $user->username;
 
-    echo "<br><br><br>";
+
 //    show all the Users
 //    $users = User::find_all();
-//    foreach ($users as $user){
-//        echo "User: " .  $user->username . "<br>";
+//    foreach ($users as $user) {
+//        echo "User: " . $user->username . " " . $user->last_name .  "<br>";
 //    }
 
 
 
 
 
-	echo "<br><br><br>";
+
 
 //    $found_user = User::find_user_by_id(2);
 //    echo    $found_user->username;
 
-    echo "<br><br><br>";
 
 //    $this_user = new User();
 //    $this_user->username = "jack";
@@ -112,6 +173,48 @@
 //    $updateme->picture = "http://nuevayores.blogs.com/.a/6a00d834518de369e2017d419cc04b970c-pi";
 //    $updateme->update();
 
-    echo "<pre>";
-    print_r(get_declared_classes());
-    echo "</pre>";
+//    echo "<pre>";
+//    print_r(get_declared_classes());
+//    echo "</pre>";
+
+//creating  a new user with the class abstration inside db_object.php
+//    $this_user = new User();
+//    $this_user->username = "freddy";
+//    $this_user->first_name = "Freddy";
+//    $this_user->last_name = "Veras Goico";
+//    $this_user->password = "123";
+//    $this_user->picture = "http://waytofamous.com/images/freddy-beras-goico-04.jpg";
+//    $this_user->save();
+
+    $photos = Photo::find_all();
+    foreach($photos as $photo){
+        echo $photo->filename . "<br>";
+    }
+
+    echo "<br><br><br>";
+
+    $all_users = User::find_all();
+    foreach($all_users as $user){
+        echo $user->username . "<br>";
+    }
+
+    echo "<br><br><br>";
+
+//    $picture = Photo::find_by_id(1);
+//    $picture->filetype = "JPG";
+//    $picture->size =   "100";
+//    $picture->description = "this is nothing special";
+//    $picture->title = "pal monte";
+//    $picture->update();
+
+
+//    creating a new photo
+//    $new_photo = new Photo();
+//    $new_photo->title = "driving ";
+//    $new_photo->size = 20;
+//    $new_photo->create();
+
+
+?>
+
+

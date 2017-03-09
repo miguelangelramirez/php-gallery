@@ -26,9 +26,38 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="../admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="users.php"><i class="fa fa-user" aria-hidden="true"></i> <span>Users</span></a></li>
-        <li><a href="upload.php"><i class="fa fa-upload" aria-hidden="true"></i> <span>Upload</span></a></li>
-        <li><a href="photos.php"><i class="fa fa-camera-retro" aria-hidden="true"></i> <span>Photos</span></a></li>
+
+          <!--   Users menu entry     -->
+        <li class="treeview">
+          <a href="#">
+              <i class="fa fa-user"></i> <span>Users</span>
+              <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="users.php"><i class="fa fa-user"></i> All Users</a></li>
+              <li class="active"><a href="add_user.php"><i class="fa fa-user-plus"></i> Add User</a></li>
+          </ul>
+        </li>
+
+        <!--   Photos menu entry     -->
+          <li class="treeview">
+              <a href="#">
+                  <i class="fa fa-user"></i> <span>Photos</span>
+                  <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li><a href="photos.php"><i class="fa fa-user"></i> All Photos</a></li>
+                  <li class="active"><a href="upload.php"><i class="fa fa-user-plus"></i> New Photo</a></li>
+              </ul>
+          </li>
+
+
+<!--        <li><a href="upload.php"><i class="fa fa-upload" aria-hidden="true"></i> <span>Upload</span></a></li>-->
+<!--        <li><a href="photos.php"><i class="fa fa-camera-retro" aria-hidden="true"></i> <span>Photos</span></a></li>-->
         <li><a href="comments.php"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span>Comments</span></a></li>
 
 

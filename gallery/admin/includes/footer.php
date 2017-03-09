@@ -222,5 +222,13 @@
 <script src="dist/js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
+<!--Adding the tinyMCE plugin-->
+<script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<!--<script>tinymce.init({ selector:'textarea' });</script>-->
+
+<!--Adding the custom JS code-->
+<script src="../js/scripts.js"></script>
+
 </body>
 </html>
