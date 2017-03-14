@@ -44,8 +44,20 @@
                         $user->first_name = $_POST['first_name'];
                         $user->last_name = $_POST['last_name'];
                         $user->password = $_POST['password'];
-                        $user->save();
 
+                        if (empty($_FILES['user_image'])){
+                            $user->save();
+                        }else {
+                            $user->set_file($_FILES['user_image']);
+                            $user->save_user_and_image();
+                            $user->save();
+                            redirect("edit_user.php?edit={$user->id}");
+                        }
+                    }
+
+                    if (isset($_GET['delete'])){
+                        echo $_GET['delete'];
+//                        redirect("users.php?edit={$_GET['delete']}");
                     }
 
 
@@ -80,6 +92,8 @@
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div style="margin-top: 0;" class="thumbnail edit_photo">
                     <img src="<?php echo $user->image_path_and_placeholder(); ?>" />
+                    <br>
+                    <input type="file" name="user_image">
                 </div>
             </div>
 
@@ -104,7 +118,7 @@
                         </div>
                         <div class="info-box-footer clearfix">
                             <div class="info-box-delete pull-left">
-                                <a  href="delete_photo.php?id=<?php echo $photo->id; ?>" class="btn btn-danger btn-lg ">Delete</a>
+                                <a  href="delete_user.php?delete=<?php echo $user->id; ?>" class="btn btn-danger btn-lg ">Delete</a>
                             </div>
                             <div class="info-box-update pull-right ">
                                 <input type="submit" name="update" value="Update" class="btn btn-primary btn-lg ">

@@ -25,12 +25,42 @@
 
     <section class="content">
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <table class="table table-striped table-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Photo</th>
+                        <th>Author</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $comments = Comment::find_all();
+
+                        foreach ($comments as $comment){
+                            echo "<tr><td>{$comment->id}</td>";
+                            echo "<td>{$comment->photo_id}</td>";
+                            echo "<td>{$comment->author}</td>";
+                            echo "<td>{$comment->body}<br> <a class='picture_actions' href='#'>Aprove</a> | <a class='picture_actions' href='#'>Edit</a> | <a class='picture_actions' href='#'>Delete</a></td>";
+                            echo "<td>{$comment->created}</td>";
+                            echo "<td>{$comment->status}</td></tr>";
+                        }
 
 
 
-          <p>Everything here</p>
+                    ?>
+
+                </tbody>
+            </table>
+
+
+
 
 
 

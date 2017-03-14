@@ -80,7 +80,7 @@
 
                         $user->delete();
                         redirect("users.php");
-
+//                        echo "delete this" .  $_GET['delete'];
                     }
 
 

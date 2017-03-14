@@ -12,6 +12,7 @@
     require_once( 'photo.php' );
     require_once( 'functions.php' );
     require_once( 'session.php' );
+    require_once( 'comment.php' );
 
 
 

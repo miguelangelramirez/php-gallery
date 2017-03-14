@@ -9,12 +9,15 @@ class User extends Db_object {
     public $first_name;
     public $last_name;
     public $user_image;
-    public $signup_date = "NOW()";
+    public $signup_date;
     public $modified_date;
     public $last_login;
     public $upload_directory = "images";
     public $image_placeholder = "https://unsplash.it/200/200/?random";
+    public $filetype;
+    public $size;
 
+    public $tmp_path;
     public $errors = array();
     public $upload_errors_array = array(
         UPLOAD_ERR_OK           => 'There is no error.',
@@ -47,27 +50,9 @@ class User extends Db_object {
         return !empty($the_result_set) ? array_shift($the_result_set) : false;
     }
 
-    //this is passing the $_FILE['uploaded_file'] as an argument
-    public function set_file($file){
-        if (empty($file) || !$file || !is_array($file)) {
-            $this->errors[] = "There was no file uploaded here";
-            return false;
-        }elseif($file['error'] != 0) {
-            $this->errors[] = $this->upload_errors_array[$file['errors']];
-            return false;
-        }else {
-            $this->user_image = basename($file['name']);
-            $this->tmp_path = $file['tmp_name'];
-            $this->filetype = $file['type'];
-            $this->size =  $file['size'];
-        }
-    }
+
 
     public function save_user_and_image(){
-
-        if ($this->id){
-            $this->update();
-        }else {
 
             if (!empty($this->errors)){
                 return false;
@@ -95,7 +80,6 @@ class User extends Db_object {
                 $this->errors[] = "The folder probably has a permissions problem...";
                 return false;
             }
-        }
     }
 
 
