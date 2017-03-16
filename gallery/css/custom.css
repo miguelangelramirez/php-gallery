@@ -83,3 +83,11 @@
 .edit_photo img {
     width:100%;
 }
+
+.img-centered {
+    position: relative;
+    display: block;
+    margin: auto;
+    border: 1px solid silver;
+    padding: 3px;
+}

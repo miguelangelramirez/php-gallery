@@ -35,12 +35,12 @@
                         <th>Photo</th>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Comments</th>
                         <th>Type</th>
                         <th>File Size</th>
                     </tr>
                   </thead>
                   <tbody>
-
                       <?php
                           $photos = Photo::find_all();
                           $images_dir = "http://gallery.dev/" . 'admin'. DS . "images/";
@@ -49,11 +49,16 @@
 
                               echo "<tr><td>{$photo->id}</td>";
 //                              echo "<td><img class=\"admin-img-grid\" src='" . $images_dir . $photo->filename ."'>";
-                              echo "<td><img alt='{$photo->alternate_text}' class=\"admin-img-grid\" src='" . $photo->picture_path() ."'>";
-                              echo "<div class='picture_actions'><a class='img-action' href='delete_photo.php?id={$photo->id}'>Delete</a> <a class='img-action' href='edit_photo.php?id={$photo->id}'>Edit</a> <a class='img-action' href='view_photo.php?id={$photo->id}'>View</a></div></td>";
+                              echo "<td><a href='../photo.php?id=" . $photo->id  . "'><img alt='{$photo->alternate_text}' class=\"admin-img-grid\" src='" . $photo->picture_path() ."'></a>";
+                              echo "<div class='picture_actions'>
+                                        <a class='img-action' href='delete_photo.php?id={$photo->id}'>Delete</a> 
+                                        <a class='img-action' href='edit_photo.php?id={$photo->id}'>Edit</a> 
+                                        <a class='img-action' href='../photo.php?id={$photo->id}'>View</a>
+                                        <a class='img-action' href='photo_comments.php?id=" . $photo->id . "'>Comments</a> </div></td>";
 
                               echo "<td>{$photo->title}</td>";
                               echo "<td>{$photo->description}</td>";
+                              echo "<td><a target='_blank' href=\"../photo.php?id=" . $photo->id . "#comments\">" . Comment::comment_count($photo->id) . " (Fronte-end)</a></td>";
                               echo "<td>{$photo->filetype}</td>";
                               echo "<td>{$photo->size}</td></tr>";
                           }

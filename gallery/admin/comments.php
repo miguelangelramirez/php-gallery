@@ -5,6 +5,7 @@
   <!-- Left side column. contains the logo and sidebar -->
   <?php include 'includes/sidebar.php'; ?>
   <!-- Left side column ends -->
+
   
   <!-- Content Wrapper starts. Contains page content -->
   <div class="content-wrapper">
@@ -26,6 +27,20 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
+            <?php
+                if (isset($_GET['aprove'])){
+                    $comment = Comment::find_by_id($_GET['aprove']);
+
+                    Comment::status($comment->id, "status", "Aproved");
+
+                }
+
+                if (isset($_GET['delete'])){
+                    $comment = Comment::find_by_id($_GET['delete']);
+
+                    $comment->delete();
+                }
+            ?>
 
             <table class="table table-striped table-sm table-bordered table-hover">
                 <thead>
@@ -47,7 +62,10 @@
                             echo "<tr><td>{$comment->id}</td>";
                             echo "<td>{$comment->photo_id}</td>";
                             echo "<td>{$comment->author}</td>";
-                            echo "<td>{$comment->body}<br> <a class='picture_actions' href='#'>Aprove</a> | <a class='picture_actions' href='#'>Edit</a> | <a class='picture_actions' href='#'>Delete</a></td>";
+                            echo "<td>{$comment->body}<br> 
+                                            <a class='picture_actions' href='?aprove=" . $comment->id ."'>Aprove</a> | 
+                                                
+                                            <a class='picture_actions' href='?delete=" . $comment->id . "'>Delete</a></td>";
                             echo "<td>{$comment->created}</td>";
                             echo "<td>{$comment->status}</td></tr>";
                         }

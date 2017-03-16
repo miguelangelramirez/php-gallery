@@ -3,7 +3,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>150</h3>
+                <h3><?php echo Comment::count_rows(); ?></h3>
 
                 <p>Comments</p>
             </div>
@@ -186,19 +186,19 @@
 //    $this_user->picture = "http://waytofamous.com/images/freddy-beras-goico-04.jpg";
 //    $this_user->save();
 
-    $photos = Photo::find_all();
-    foreach($photos as $photo){
-        echo $photo->filename . "<br>";
-    }
-
-    echo "<br><br><br>";
-
-    $all_users = User::find_all();
-    foreach($all_users as $user){
-        echo $user->username . "<br>";
-    }
-
-    echo "<br><br><br>";
+//    $photos = Photo::find_all();
+//    foreach($photos as $photo){
+//        echo $photo->filename . "<br>";
+//    }
+//
+//    echo "<br><br><br>";
+//
+//    $all_users = User::find_all();
+//    foreach($all_users as $user){
+//        echo $user->username . "<br>";
+//    }
+//
+//    echo "<br><br><br>";
 
 //    $picture = Photo::find_by_id(1);
 //    $picture->filetype = "JPG";

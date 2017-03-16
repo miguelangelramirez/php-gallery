@@ -168,27 +168,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }//End of class
 
     $db_object = new Db_object();
